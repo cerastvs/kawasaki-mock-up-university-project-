@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Users</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col><b>ID</b></ion-col>
+      <ion-col><b>Username</b></ion-col>
+      <ion-col><b>Role</b></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let user of users">
+      <ion-col>{{ user.id }}</ion-col>
+      <ion-col>{{ user.username }}</ion-col>
+      <ion-col>{{ user.role }}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

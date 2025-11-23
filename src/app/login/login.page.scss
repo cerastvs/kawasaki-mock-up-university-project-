@@ -1,0 +1,9 @@
+ion-content {
+  --background: var(--ion-color-light);
+
+  .ion-card {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 20vh; /* Adjust as needed to vertically center */
+  }
+}
