@@ -1,0 +1,12 @@
+ion-card {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  padding: 8px;
+}

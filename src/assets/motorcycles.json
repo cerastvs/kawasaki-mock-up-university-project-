@@ -1,0 +1,47 @@
+[
+  {
+    "modelName": "Ninja ZX-10R",
+    "category": "Supersport",
+    "priceSRP": 18599,
+    "mainImage": "assets/motorplaceholder.webp",
+    "engineType": "Liquid-cooled, 4-stroke In-Line Four",
+    "displacementCC": 998,
+    "maxPower": "203 PS (149.3 kW) @ 13,200 rpm",
+    "maxTorque": "114.9 Nm (11.7 kgf.m) @ 11,400 rpm",
+    "fuelCapacity": 17,
+    "transmission": "6-speed, return",
+    "seatHeight": 835,
+    "weightKerb": 207,
+    "availableColors": ["Lime Green", "Metallic Graphite Gray"]
+  },
+  {
+    "modelName": "Z900",
+    "category": "Naked",
+    "priceSRP": 9399,
+    "mainImage": "assets/motorplaceholder.webp",
+    "engineType": "Liquid-cooled, 4-stroke In-Line Four",
+    "displacementCC": 948,
+    "maxPower": "125 PS (92.2 kW) @ 9,500 rpm",
+    "maxTorque": "98.6 Nm (10.1 kgf.m) @ 7,700 rpm",
+    "fuelCapacity": 17,
+    "transmission": "6-speed, return",
+    "seatHeight": 820,
+    "weightKerb": 212,
+    "availableColors": ["Metallic Spark Black", "Metallic Flat Spark Black"]
+  },
+  {
+    "modelName": "Versys 650",
+    "category": "Adventure",
+    "priceSRP": 8999,
+    "mainImage": "assets/motorplaceholder.webp",
+    "engineType": "Liquid-cooled, 4-stroke Parallel Twin",
+    "displacementCC": 649,
+    "maxPower": "67 PS (49.3 kW) @ 8,500 rpm",
+    "maxTorque": "61 Nm (6.2 kgf.m) @ 7,000 rpm",
+    "fuelCapacity": 21,
+    "transmission": "6-speed, return",
+    "seatHeight": 840,
+    "weightKerb": 219,
+    "availableColors": ["Metallic Spark Black", "Metallic Flat Spark Black"]
+  }
+]
