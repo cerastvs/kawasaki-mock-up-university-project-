@@ -5,3 +5,14 @@
   gap: 16px;
   padding: 16px;
 }
+
+.header-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.header-logo {
+  height: 40px;
+}
