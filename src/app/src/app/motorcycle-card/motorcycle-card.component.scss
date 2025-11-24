@@ -2,6 +2,10 @@ ion-card {
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
+  display: flex; /* Make it a flex container */
+  flex-direction: column; /* Arrange children vertically */
+  height: 100%; /* Ensure card takes full height of its container if needed */
+  justify-content: space-between; /* Push footer to bottom */
 }
 
 .card-image {
@@ -9,4 +13,24 @@ ion-card {
   height: 200px;
   object-fit: cover;
   padding: 8px;
+}
+
+ion-card-content {
+  flex-grow: 1; /* Allow content to grow and push footer down */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+ion-footer {
+  width: 100%;
+  padding: 0;
+}
+
+ion-toolbar {
+  padding: 0;
+}
+
+ion-grid {
+  padding: 0;
 }
