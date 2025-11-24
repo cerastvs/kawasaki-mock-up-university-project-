@@ -1,9 +1,9 @@
-<ion-content class="ion-padding">
+<ion-content class="ion-padding card">
   <ion-card *ngIf="motorcycle">
     <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
     <ion-card-header>
-      <ion-card-title>{{ motorcycle.modelName }}</ion-card-title>
-      <ion-card-subtitle>SRP: ${{ motorcycle.priceSRP | number:'1.2-2' }}</ion-card-subtitle>
+      <ion-card-title><strong>{{ motorcycle.modelName }}</strong></ion-card-title>
+      <ion-card-subtitle>SRP: ${{ motorcycle.priceSRP }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
