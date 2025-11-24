@@ -1,61 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ !showFinanceCalculator ? motorcycle.modelName : 'Calculate Finance' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
-  <ion-card *ngIf="motorcycle">
-    <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
-    <ion-card-header>
-      <ion-card-title><strong>{{ motorcycle.modelName }}</strong></ion-card-title>
-      <ion-card-subtitle>SRP: ${{ motorcycle.priceSRP }}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label>Category</ion-label>
-          <ion-note slot="end">{{ motorcycle.category }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Engine Type</ion-label>
-          <ion-note slot="end">{{ motorcycle.engineType }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Displacement</ion-label>
-          <ion-note slot="end">{{ motorcycle.displacementCC }}cc</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Max Power</ion-label>
-          <ion-note slot="end">{{ motorcycle.maxPower }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Max Torque</ion-label>
-          <ion-note slot="end">{{ motorcycle.maxTorque }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Fuel Capacity</ion-label>
-          <ion-note slot="end">{{ motorcycle.fuelCapacity }}L</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Transmission</ion-label>
-          <ion-note slot="end">{{ motorcycle.transmission }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Seat Height</ion-label>
-          <ion-note slot="end">{{ motorcycle.seatHeight }}mm</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Weight (Kerb)</ion-label>
-          <ion-note slot="end">{{ motorcycle.weightKerb }}kg</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Available Colors</ion-label>
-          <ion-note slot="end">{{ motorcycle.availableColors.join(', ') }}</ion-note>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <!-- Vehicle Details View -->
+  <div *ngIf="!showFinanceCalculator">
+    <ion-card *ngIf="motorcycle">
+      <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
+      <ion-card-header>
+        <ion-card-title><strong>{{ motorcycle.modelName }}</strong></ion-card-title>
+        <ion-card-subtitle>SRP: ${{ motorcycle.priceSRP }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-note slot="end">{{ motorcycle.category }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Engine Type</ion-label>
+            <ion-note slot="end">{{ motorcycle.engineType }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Displacement</ion-label>
+            <ion-note slot="end">{{ motorcycle.displacementCC }}cc</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Max Power</ion-label>
+            <ion-note slot="end">{{ motorcycle.maxPower }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Max Torque</ion-label>
+            <ion-note slot="end">{{ motorcycle.maxTorque }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Fuel Capacity</ion-label>
+            <ion-note slot="end">{{ motorcycle.fuelCapacity }}L</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Transmission</ion-label>
+            <ion-note slot="end">{{ motorcycle.transmission }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Seat Height</ion-label>
+            <ion-note slot="end">{{ motorcycle.seatHeight }}mm</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Weight (Kerb)</ion-label>
+            <ion-note slot="end">{{ motorcycle.weightKerb }}kg</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Available Colors</ion-label>
+            <ion-note slot="end">{{ motorcycle.availableColors.join(', ') }}</ion-note>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Finance Calculator View -->
+  <div *ngIf="showFinanceCalculator">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Finance Calculator</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>This is where the finance calculator content will go.</p>
+        <!-- Placeholder for finance calculator content -->
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
+
 <ion-footer>
   <ion-toolbar>
     <div class="ion-padding button-container">
-      <ion-button>Reserve / Inquire</ion-button>
-      <ion-button color="secondary">Calculate Finance</ion-button>
+      <ion-button *ngIf="!showFinanceCalculator">Reserve / Inquire</ion-button>
+      <ion-button *ngIf="!showFinanceCalculator" color="secondary" (click)="toggleFinanceView()">Calculate Finance</ion-button>
+      <ion-button *ngIf="showFinanceCalculator" (click)="toggleFinanceView()">Back to Details</ion-button>
     </div>
   </ion-toolbar>
 </ion-footer>

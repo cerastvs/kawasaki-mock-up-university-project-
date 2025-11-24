@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 export class MotorcycleDetailsModalComponent  implements OnInit {
 
   @Input() motorcycle: any;
+  showFinanceCalculator: boolean = false;
 
   constructor(private modalCtrl: ModalController) { }
 
@@ -19,6 +20,10 @@ export class MotorcycleDetailsModalComponent  implements OnInit {
 
   close() {
     this.modalCtrl.dismiss();
+  }
+
+  toggleFinanceView() {
+    this.showFinanceCalculator = !this.showFinanceCalculator;
   }
 
 }
