@@ -10,7 +10,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Vehicle Details View -->
   <div *ngIf="!showFinanceCalculator">
     <ion-card *ngIf="motorcycle">
       <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
@@ -72,7 +71,22 @@
         <ion-card-title>Finance Calculator</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>This is where the finance calculator content will go.</p>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Deposit ($)</ion-label>
+            <ion-input type="number" [(ngModel)]="deposit" [min]="motorcycle.priceSRP * minDepositPercentage"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Months to Pay</ion-label>
+            <ion-input type="number" [(ngModel)]="monthsToPay" min="1"></ion-input>
+          </ion-item>
+          <ion-button expand="block" class="ion-margin-top" (click)="calculateMonthlyPayment()">Calculate</ion-button>
+
+          <ion-item *ngIf="monthlyPayment !== null" class="ion-margin-top">
+            <ion-label>Monthly Payment</ion-label>
+            <ion-note slot="end">${{ monthlyPayment | number:'1.2-2' }}</ion-note>
+          </ion-item>
+        </ion-list>
         <!-- Placeholder for finance calculator content -->
       </ion-card-content>
     </ion-card>
