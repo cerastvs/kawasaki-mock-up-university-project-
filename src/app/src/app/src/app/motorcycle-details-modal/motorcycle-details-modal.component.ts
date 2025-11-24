@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './motorcycle-details-modal.component.html',
   styleUrls: ['./motorcycle-details-modal.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class MotorcycleDetailsModalComponent  implements OnInit {
 
