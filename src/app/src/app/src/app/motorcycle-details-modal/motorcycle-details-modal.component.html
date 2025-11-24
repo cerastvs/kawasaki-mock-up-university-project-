@@ -64,7 +64,7 @@
     </ion-card>
   </div>
 
-  <!-- Finance Calculator View -->
+
   <div *ngIf="showFinanceCalculator">
     <ion-card>
       <ion-card-header>
@@ -73,21 +73,38 @@
       <ion-card-content>
         <ion-list>
           <ion-item>
-            <ion-label position="floating">Deposit ($)</ion-label>
-            <ion-input type="number" [(ngModel)]="deposit" [min]="motorcycle.priceSRP * minDepositPercentage"></ion-input>
+            <ion-label position="stacked">Deposit: ${{ deposit | number:'1.2-2' }}</ion-label>
+            <ion-range
+              [min]="motorcycle.priceSRP * minDepositPercentage"
+              [max]="motorcycle.priceSRP * maxDepositPercentage"
+              [step]="motorcycle.priceSRP * 0.01"
+              [(ngModel)]="deposit"
+              (ionChange)="calculateMonthlyPayment()"
+            >
+              <ion-label slot="start">${{ (motorcycle.priceSRP * minDepositPercentage) | number:'1.0-0' }}</ion-label>
+              <ion-label slot="end">${{ (motorcycle.priceSRP * maxDepositPercentage) | number:'1.0-0' }}</ion-label>
+            </ion-range>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Months to Pay</ion-label>
-            <ion-input type="number" [(ngModel)]="monthsToPay" min="1"></ion-input>
+            <ion-label position="stacked">Months to Pay: {{ monthsToPay }}</ion-label>
+            <ion-range
+              [min]="minMonthsToPay"
+              [max]="maxMonthsToPay"
+              [step]="6"
+              [(ngModel)]="monthsToPay"
+              (ionChange)="calculateMonthlyPayment()"
+            >
+              <ion-label slot="start">{{ minMonthsToPay }}</ion-label>
+              <ion-label slot="end">{{ maxMonthsToPay }}</ion-label>
+            </ion-range>
           </ion-item>
-          <ion-button expand="block" class="ion-margin-top" (click)="calculateMonthlyPayment()">Calculate</ion-button>
 
           <ion-item *ngIf="monthlyPayment !== null" class="ion-margin-top">
             <ion-label>Monthly Payment</ion-label>
             <ion-note slot="end">${{ monthlyPayment | number:'1.2-2' }}</ion-note>
           </ion-item>
         </ion-list>
-        <!-- Placeholder for finance calculator content -->
+
       </ion-card-content>
     </ion-card>
   </div>

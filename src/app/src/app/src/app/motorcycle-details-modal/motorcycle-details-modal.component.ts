@@ -16,15 +16,20 @@ export class MotorcycleDetailsModalComponent  implements OnInit {
   showFinanceCalculator: boolean = false;
 
   deposit: number = 0;
-  monthsToPay: number = 12; // Default to 12 months
+  monthsToPay: number = 6; // Default to minimum 6 months
   monthlyPayment: number | null = null;
   minDepositPercentage: number = 0.10; // 10%
+  maxDepositPercentage: number = 0.80; // 80%
+
+  minMonthsToPay: number = 6;
+  maxMonthsToPay: number = 36 * 12; // 36 years converted to months
 
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
     if (this.motorcycle && this.motorcycle.priceSRP) {
       this.deposit = this.motorcycle.priceSRP * this.minDepositPercentage;
+      this.calculateMonthlyPayment(); // Calculate initial payment
     }
   }
 
@@ -34,11 +39,12 @@ export class MotorcycleDetailsModalComponent  implements OnInit {
 
   toggleFinanceView() {
     this.showFinanceCalculator = !this.showFinanceCalculator;
-    // Reset payment when switching views
+
     this.monthlyPayment = null;
     if (this.showFinanceCalculator && this.motorcycle && this.motorcycle.priceSRP) {
       this.deposit = this.motorcycle.priceSRP * this.minDepositPercentage;
-      this.monthsToPay = 12;
+      this.monthsToPay = this.minMonthsToPay; // Reset to min months
+      this.calculateMonthlyPayment(); // Calculate initial payment for finance view
     }
   }
 
@@ -49,18 +55,21 @@ export class MotorcycleDetailsModalComponent  implements OnInit {
     }
 
     const price = this.motorcycle.priceSRP;
-    const minDeposit = price * this.minDepositPercentage;
+    const minDepositAmount = price * this.minDepositPercentage;
+    const maxDepositAmount = price * this.maxDepositPercentage;
 
-    if (this.deposit < minDeposit) {
-      console.error(`Deposit must be at least ${this.minDepositPercentage * 100}% of the price ($${minDeposit.toFixed(2)})`);
-      this.monthlyPayment = null;
-      return;
+    // Ensure deposit is within valid range
+    if (this.deposit < minDepositAmount) {
+      this.deposit = minDepositAmount;
+    } else if (this.deposit > maxDepositAmount) {
+      this.deposit = maxDepositAmount;
     }
 
-    if (this.monthsToPay <= 0) {
-      console.error('Months of payment must be a positive number.');
-      this.monthlyPayment = null;
-      return;
+    // Ensure monthsToPay is within valid range
+    if (this.monthsToPay < this.minMonthsToPay) {
+      this.monthsToPay = this.minMonthsToPay;
+    } else if (this.monthsToPay > this.maxMonthsToPay) {
+      this.monthsToPay = this.maxMonthsToPay;
     }
 
     const principal = price - this.deposit;
