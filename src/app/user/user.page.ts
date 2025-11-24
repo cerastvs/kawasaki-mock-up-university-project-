@@ -58,7 +58,8 @@ export class UserPage implements OnInit {
       component: MotorcycleDetailsModalComponent,
       componentProps: {
         motorcycle: motorcycle
-      }
+      },
+      cssClass: 'modal-corners'
     });
     return await modal.present();
   }

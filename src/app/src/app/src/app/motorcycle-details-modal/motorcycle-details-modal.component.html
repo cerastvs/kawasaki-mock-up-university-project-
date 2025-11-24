@@ -1,4 +1,4 @@
-<ion-content class="ion-padding card">
+<ion-content class="ion-padding">
   <ion-card *ngIf="motorcycle">
     <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
     <ion-card-header>
@@ -53,6 +53,9 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-button expand="block">Reserve / Inquire</ion-button>
+    <div class="ion-padding">
+      <ion-button expand="block">Reserve / Inquire</ion-button>
+      <ion-button expand="block" color="secondary" class="ion-margin-top">Calculate Finance</ion-button>
+    </div>
   </ion-toolbar>
 </ion-footer>
