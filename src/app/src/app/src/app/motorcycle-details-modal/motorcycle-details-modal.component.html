@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ motorcycle?.modelName }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="motorcycle">
+    <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
+    <ion-card-header>
+      <ion-card-title>{{ motorcycle.modelName }}</ion-card-title>
+      <ion-card-subtitle>SRP: ${{ motorcycle.priceSRP | number:'1.2-2' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-note slot="end">{{ motorcycle.category }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Engine Type</ion-label>
+          <ion-note slot="end">{{ motorcycle.engineType }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Displacement</ion-label>
+          <ion-note slot="end">{{ motorcycle.displacementCC }}cc</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Max Power</ion-label>
+          <ion-note slot="end">{{ motorcycle.maxPower }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Max Torque</ion-label>
+          <ion-note slot="end">{{ motorcycle.maxTorque }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Fuel Capacity</ion-label>
+          <ion-note slot="end">{{ motorcycle.fuelCapacity }}L</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Transmission</ion-label>
+          <ion-note slot="end">{{ motorcycle.transmission }}</e-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Seat Height</ion-label>
+          <ion-note slot="end">{{ motorcycle.seatHeight }}mm</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Weight (Kerb)</ion-label>
+          <ion-note slot="end">{{ motorcycle.weightKerb }}kg</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Available Colors</ion-label>
+          <ion-note slot="end">{{ motorcycle.availableColors.join(', ') }}</ion-note>
+        </ion-item>
+.
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

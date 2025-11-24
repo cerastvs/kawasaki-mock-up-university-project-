@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "modelName": "Ninja ZX-10R",
     "category": "Supersport",
     "priceSRP": 18599,
@@ -15,6 +16,7 @@
     "availableColors": ["Lime Green", "Metallic Graphite Gray"]
   },
   {
+    "id": "2",
     "modelName": "Z900",
     "category": "Naked",
     "priceSRP": 9399,
@@ -30,6 +32,7 @@
     "availableColors": ["Metallic Spark Black", "Metallic Flat Spark Black"]
   },
   {
+    "id": "3",
     "modelName": "Versys 650",
     "category": "Adventure",
     "priceSRP": 8999,
