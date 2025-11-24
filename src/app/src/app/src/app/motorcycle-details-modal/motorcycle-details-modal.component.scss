@@ -1,0 +1,8 @@
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust as needed for spacing between buttons */
+}
+
+.button-container ion-button {
+    flex: 1; /* Makes buttons take equal width */
+}
