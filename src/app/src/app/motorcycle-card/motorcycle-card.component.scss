@@ -4,7 +4,6 @@ ion-card {
   margin: 0 auto;
   display: flex; /* Make it a flex container */
   flex-direction: column; /* Arrange children vertically */
-  height: 100%; /* Ensure card takes full height of its container if needed */
   justify-content: space-between; /* Push footer to bottom */
 }
 

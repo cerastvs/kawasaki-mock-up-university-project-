@@ -1,3 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ motorcycle?.modelName }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
   <ion-card *ngIf="motorcycle">
     <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
@@ -51,8 +60,3 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <ion-button expand="block">Reserve / Inquire</ion-button>
-  </ion-toolbar>
-</ion-footer>

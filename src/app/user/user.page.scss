@@ -4,6 +4,7 @@
   justify-content: center;
   gap: 16px;
   padding: 16px;
+  align-items: stretch; /* Make all cards in a row have the same height */
 }
 
 .header-toolbar {
