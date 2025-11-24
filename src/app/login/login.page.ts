@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, FormsModule, HttpClientModule]
+  imports: [CommonModule, IonicModule, RouterModule, FormsModule]
 })
 export class LoginPage implements OnInit {
 
@@ -18,27 +17,34 @@ export class LoginPage implements OnInit {
   password = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private router: Router, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
 
-  login() {
-    this.http.get<any[]>('assets/users.json').subscribe(users => {
-      const user = users.find(u => u.username === this.username && u.password === this.password);
+  async login() {
+    try {
+      const response = await fetch('assets/users.json');
+      if (!response.ok) {
+        throw new Error('Failed to load users.');
+      }
+      const users = await response.json();
+      const user = users.find((u: any) => u.username === this.username && u.password === this.password);
       if (user) {
         if (user.role === 'admin') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/user']);
+          this.router.navigate(['/user', user.id]);
         }
       } else {
         this.errorMessage = 'Invalid username or password.';
+        this.cd.detectChanges();
       }
-    }, error => {
+    } catch (error) {
       console.error(error);
       this.errorMessage = 'An error occurred. Please try again.';
-    });
+      this.cd.detectChanges();
+    }
   }
 
 }

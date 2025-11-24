@@ -3,12 +3,18 @@
     "id": "1",
     "username": "admin",
     "password": "password",
-    "role": "admin"
+    "role": "admin",
+    "fullName": "Administrator",
+    "phoneNumber": "123-456-7890",
+    "email": "admin@example.com"
   },
   {
     "id": "2",
     "username": "user",
     "password": "password",
-    "role": "user"
+    "role": "user",
+    "fullName": "Regular User",
+    "phoneNumber": "098-765-4321",
+    "email": ""
   }
 ]
