@@ -46,5 +46,46 @@
     "seatHeight": 840,
     "weightKerb": 219,
     "availableColors": ["Metallic Spark Black", "Metallic Flat Spark Black"]
+  },
+  {
+    "id": "4",
+    "modelName": "Kawasaki Ninja 400",
+    "category": "Sport",
+    "priceSRP": 340900,
+    "engineType": "Liquid-cooled, 4-stroke, 8-valve, DOHC, parallel-twin",
+    "displacementCC": 399,
+    "maxPower": "48.3 hp @ 10,000 rpm",
+    "maxTorque": "38 Nm @ 8,000 rpm",
+    "fuelCapacity": 14,
+    "transmission": "6-speed (Assist & Slipper Clutch)",
+    "seatHeight": 785,
+    "weightKerb": 168,
+    "availableColors": [
+      "Lime Green / Ebony (KRT Edition)",
+      "Metallic Carbon Gray",
+      "Pearl Black"
+    ],
+    "mainImage": "assets/images/ninja400.jpeg"
+  },
+  {
+    "id": "5",
+    "modelName": "Mio i 125",
+    "category": "scooter",
+    "priceSRP": 75900,
+    "engineType": "125cc, air-cooled, 4-stroke, SOHC, 2-valve",
+    "displacementCC": 125,
+    "maxPower": "7.0kW (9.4PS) @ 8000r/min",
+    "maxTorque": "9.6N·m (1.0kgf·m) @ 5500r/min",
+    "fuelCapacity": 4.2,
+    "transmission": "V-belt automatic (CVT)",
+    "seatHeight": 750,
+    "weightKerb": 94,
+    "availableColors": [
+      "White",
+      "Yellow/white",
+      "Black",
+      "Blue"
+    ],
+    "mainImage": "assets/images/mio125.jpeg"
   }
 ]
