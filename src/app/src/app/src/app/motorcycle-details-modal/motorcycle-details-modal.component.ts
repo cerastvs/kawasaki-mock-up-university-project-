@@ -22,7 +22,7 @@ export class MotorcycleDetailsModalComponent  implements OnInit {
   maxDepositPercentage: number = 0.80; // 80%
 
   minMonthsToPay: number = 6;
-  maxMonthsToPay: number = 36 * 12; // 36 years converted to months
+  maxMonthsToPay: number = 36;
 
   constructor(private modalCtrl: ModalController) { }
 

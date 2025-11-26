@@ -25,8 +25,8 @@ const routes: Routes = [
     component: AdminPage
   },
   {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
+    path: 'user/:id',
+    loadComponent: () => import('./user/user.page').then( m => m.UserPage)
   }
 ];
 

@@ -1,49 +1,85 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MotorcycleCardComponent } from 'src/app/src/app/motorcycle-card/motorcycle-card.component';
 import { MotorcycleDetailsModalComponent } from 'src/app/src/app/src/app/motorcycle-details-modal/motorcycle-details-modal.component';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, MotorcycleCardComponent, MotorcycleDetailsModalComponent]
+  imports: [CommonModule, IonicModule, MotorcycleCardComponent, MotorcycleDetailsModalComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class UserPage implements OnInit {
+export class UserPage implements OnInit, AfterViewInit {
 
   public user: any;
   public motorcycles: any[] = [];
+  public activeMotorcycle: any;
+  
+  @ViewChild('swiperContainer') swiperContainer!: ElementRef;
 
-  constructor(private route: ActivatedRoute, private router: Router, private modalCtrl: ModalController) { }
+  constructor(private route: ActivatedRoute, private modalCtrl: ModalController, private cd: ChangeDetectorRef) { }
 
   async ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('id');
-    if (!userId) {
-      console.error('User ID not found in route');
+  const userId = this.route.snapshot.paramMap.get('id');
+
+  try {
+    const userResponse = await fetch('/assets/users.json');
+    const users = await userResponse.json();
+    this.user = users.find((u: any) => u.id === userId);
+
+    const motoResponse = await fetch('/assets/motorcycles.json');
+    this.motorcycles = await motoResponse.json();
+
+
+    if (this.motorcycles.length > 0) {
+      this.activeMotorcycle = this.motorcycles[0];
+    }
+    this.initSwiper(); // Call initSwiper after motorcycles are loaded
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+  ngAfterViewInit() {
+    // initSwiper is now called from ngOnInit
+  }
+
+  private initSwiper() {
+    if (!this.swiperContainer) {
+      setTimeout(() => this.initSwiper(), 100);
       return;
     }
 
-    try {
-      // Fetch user data
-      const userResponse = await fetch('/assets/users.json');
-      if (!userResponse.ok) {
-        throw new Error('Failed to load users.');
-      }
-      const users = await userResponse.json();
-      this.user = users.find((u: any) => u.id === userId);
+    const swiperEl = this.swiperContainer.nativeElement;
+    
+    swiperEl.slidesPerView = 1;
+    swiperEl.speed = 500;
+    swiperEl.loop = false;
+    swiperEl.autoplay = true; 
+    
+    swiperEl.initialize();
+  }
 
-      // Fetch motorcycle data
-      const motoResponse = await fetch('/assets/motorcycles.json');
-      if (!motoResponse.ok) {
-        throw new Error('Failed to load motorcycles.');
-      }
-      this.motorcycles = await motoResponse.json();
+  handleSwiperInit(event: any) {
+    const swiper = event.target.swiper;
+    if (this.motorcycles && this.motorcycles.length > 0 && swiper) {
+      this.activeMotorcycle = this.motorcycles[swiper.realIndex];
+      this.cd.detectChanges();
+    }
+  }
 
-    } catch (error) {
-      console.error('Error fetching data:', error);
+  handleSwiperSlideChange(event: any) {
+    const swiper = event.target.swiper;
+    if (this.motorcycles && this.motorcycles.length > 0 && swiper) {
+      this.activeMotorcycle = this.motorcycles[swiper.realIndex];
+      this.cd.detectChanges();
     }
   }
 
@@ -63,5 +99,4 @@ export class UserPage implements OnInit {
     });
     return await modal.present();
   }
-
 }

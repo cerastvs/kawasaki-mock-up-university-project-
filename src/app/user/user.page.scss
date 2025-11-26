@@ -1,10 +1,83 @@
+.featured-motorcycle-wrapper {
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); 
+  margin: 15px;
+}
+
+.featured-content-container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(to right, #2c2c2c 0%, #1a1a1a 100%);
+  color: white;
+}
+
+.details-container {
+  flex: 1;
+  text-align: left;
+  padding: 15px;
+  margin-right: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  position: relative;
+}
+
+.details-container h2 {
+  font-size: 1.8em;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.details-container p {
+  font-size: 1em;
+  color: white; 
+  margin-bottom: 5px;
+}
+
+.image-slider {
+  flex: 1;
+  height: 350px; 
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: transparent; 
+  position: relative;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+@media (min-width: 768px) {
+  .featured-motorcycle-wrapper {
+
+    align-items: center;
+  }
+
+  .image-slider {
+    flex: 1;
+    max-width: 500px;
+    height: 350px;
+  }
+}
+
 .motorcycle-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
   padding: 16px;
-  align-items: stretch; /* Make all cards in a row have the same height */
+  align-items: stretch;
 }
 
 .header-toolbar {

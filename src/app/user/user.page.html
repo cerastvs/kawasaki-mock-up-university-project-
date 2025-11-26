@@ -5,50 +5,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">User Details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card-header>
+    <ion-card-title>Featured Motorcycles</ion-card-title>
+  </ion-card-header>
 
-  <ion-list *ngIf="user" [inset]="true">
-    <ion-item>
-      <ion-label>
-        <h2>ID</h2>
-        <p>{{ user.id }}</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Username</h2>
-        <p>{{ user.username }}</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Full Name</h2>
-        <p>{{ user.fullName }}</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Phone Number</h2>
-        <p>{{ user.phoneNumber }}</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Email</h2>
-        <p>{{ user.email || 'N/A' }}</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Role</h2>
-        <p>{{ user.role }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <div class="featured-motorcycle-wrapper">
+    <div class="featured-content-container">
+      <div class="details-container">
+        <div *ngIf="activeMotorcycle">
+          <h2>{{ activeMotorcycle.modelName }}</h2>
+          <p><strong>Category:</strong> {{ activeMotorcycle.category }}</p>
+          <p><strong>Engine Type:</strong> {{ activeMotorcycle.engineType }}</p>
+          <p><strong>Displacement (CC):</strong> {{ activeMotorcycle.displacementCC }}</p>
+          <p><strong>SRP:</strong> ₱{{ activeMotorcycle.priceSRP }}</p>
+          <ion-button (click)="handleViewDetails(activeMotorcycle.id)">View More</ion-button>
+        </div>
+      </div>
+      <swiper-container #swiperContainer class="image-slider" (swiperinit)="handleSwiperInit($event)" (swiperslidechange)="handleSwiperSlideChange($event)">
+        <swiper-slide *ngFor="let motorcycle of motorcycles">
+          <div class="image">
+            <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
 
   <ion-card-header>
     <ion-card-title>Available Motorcycles</ion-card-title>
