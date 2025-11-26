@@ -11,16 +11,6 @@
 
   <div class="featured-motorcycle-wrapper">
     <div class="featured-content-container">
-      <div class="details-container">
-        <div *ngIf="activeMotorcycle">
-          <h2>{{ activeMotorcycle.modelName }}</h2>
-          <p><strong>Category:</strong> {{ activeMotorcycle.category }}</p>
-          <p><strong>Engine Type:</strong> {{ activeMotorcycle.engineType }}</p>
-          <p><strong>Displacement (CC):</strong> {{ activeMotorcycle.displacementCC }}</p>
-          <p><strong>SRP:</strong> ₱{{ activeMotorcycle.priceSRP }}</p>
-          <ion-button (click)="handleViewDetails(activeMotorcycle.id)">View More</ion-button>
-        </div>
-      </div>
       <swiper-container #swiperContainer class="image-slider" (swiperinit)="handleSwiperInit($event)" (swiperslidechange)="handleSwiperSlideChange($event)">
         <swiper-slide *ngFor="let motorcycle of motorcycles">
           <div class="image">
@@ -28,6 +18,16 @@
           </div>
         </swiper-slide>
       </swiper-container>
+      <div class="details-container">
+        <div *ngIf="activeMotorcycle">
+          <h2>{{ activeMotorcycle.modelName.toUpperCase() }}</h2>
+          <p><strong>Category:</strong> {{ activeMotorcycle.category }}</p>
+          <p><strong>Engine Type:</strong> {{ activeMotorcycle.engineType }}</p>
+          <p><strong>Displacement (CC):</strong> {{ activeMotorcycle.displacementCC }}</p>
+          <p><strong>SRP:</strong> ₱{{ activeMotorcycle.priceSRP }}</p>
+          <ion-button (click)="handleViewDetails(activeMotorcycle.id)">View More</ion-button>
+        </div>
+      </div>
     </div>
   </div>
 

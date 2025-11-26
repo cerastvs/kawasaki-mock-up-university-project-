@@ -7,39 +7,35 @@
 
 .featured-content-container {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Mobile-first: stack items vertically */
   padding: 20px;
-  background: linear-gradient(to right, #2c2c2c 0%, #1a1a1a 100%);
-  color: white;
 }
 
 .details-container {
-  flex: 1;
+  width: 100%; /* Take full width on mobile */
   text-align: left;
   padding: 15px;
-  margin-right: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-right: 0; /* Remove margin for mobile */
   z-index: 2;
   position: relative;
 }
 
 .details-container h2 {
-  font-size: 1.8em;
-  color: white;
+  font-size: 2em; /* Mobile-friendly font size */
   margin-bottom: 10px;
 }
 
 .details-container p {
-  font-size: 1em;
-  color: white; 
+  font-size: 1em; 
   margin-bottom: 5px;
 }
 
 .image-slider {
-  flex: 1;
-  height: 350px; 
+  width: 100%; /* Take full width on mobile */
+  height: 250px; /* Adjusted height for mobile */
   border-radius: 10px;
   overflow: hidden;
+  margin-top: 20px; /* Add some space between text and image on mobile */
 }
 
 .image {
@@ -60,16 +56,32 @@
 
 @media (min-width: 768px) {
   .featured-motorcycle-wrapper {
-
     align-items: center;
   }
 
+  .featured-content-container {
+    flex-direction: row; /* Desktop: arrange items horizontally */
+    align-items: center; /* Vertically align items */
+  }
+
+  .details-container {
+    flex: 1; /* Share space equally */
+    margin-right: 20px; /* Restore margin for desktop */
+    width: auto; /* Revert width */
+  }
+
+  .details-container h2 {
+    font-size: 3em; /* Larger font size for desktop */
+  }
+
   .image-slider {
-    flex: 1;
-    max-width: 500px;
-    height: 350px;
+    flex: 1; /* Share space equally */
+    max-width: 500px; /* Keep max-width for image */
+    height: 350px; /* Restore height for desktop */
+    margin-top: 0; /* Remove top margin for desktop */
   }
 }
+
 
 .motorcycle-container {
   display: flex;
@@ -90,3 +102,5 @@
 .header-logo {
   height: 40px;
 }
+
+
