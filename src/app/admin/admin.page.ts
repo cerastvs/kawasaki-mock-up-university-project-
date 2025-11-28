@@ -17,49 +17,29 @@ export class AdminPage implements OnInit {
   pendingInquiries: number = 0;
   completedInquiries: number = 0;
 
-  allInquiries: any[] = [];
-  latestInquiries: any[] = []; // New property for latest inquiries
-  statusOptions: string[] = ['pending', 'in progress', 'completed'];
+  latestInquiries: any[] = []; // Only keep latestInquiries for display
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.loadAllInquiries(); // Load all inquiries on init
+    this.loadInquiriesAndStats(); // New method to load both latest inquiries and stats
   }
 
-  loadAllInquiries() {
+  loadInquiriesAndStats() {
     try {
-      this.allInquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
-      // Sort inquiries by submittedAt in descending order and take the top 3
-      this.latestInquiries = this.allInquiries
-                               .sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime())
+      const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+      
+      // Calculate stats directly from inquiries
+      this.totalInquiries = inquiries.length;
+      this.pendingInquiries = inquiries.filter((inq: any) => inq.status === 'pending').length;
+      this.completedInquiries = inquiries.filter((inq: any) => inq.status === 'completed').length;
+
+      // Populate latestInquiries
+      this.latestInquiries = inquiries
+                               .sort((a: any, b: any) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime())
                                .slice(0, 3);
-      this.loadInquiryStats(); // Recalculate stats after loading all inquiries
     } catch (error) {
-      console.error('Error loading all inquiries from localStorage:', error);
-    }
-  }
-
-  loadInquiryStats() {
-    this.totalInquiries = this.allInquiries.length;
-    this.pendingInquiries = this.allInquiries.filter((inq: any) => inq.status === 'pending').length;
-    this.completedInquiries = this.allInquiries.filter((inq: any) => inq.status === 'completed').length;
-  }
-
-  updateInquiryStatus(inquiry: any, newStatus: string) {
-    const inquiryIndex = this.allInquiries.findIndex(inq => inq === inquiry);
-    if (inquiryIndex > -1) {
-      this.allInquiries[inquiryIndex].status = newStatus;
-      localStorage.setItem('inquiries', JSON.stringify(this.allInquiries));
-      this.loadAllInquiries(); // Reload all to update latest and stats
-    }
-  }
-
-  deleteInquiry(inquiry: any) {
-    if (confirm(`Are you sure you want to delete the inquiry for ${inquiry.motorcycle}?`)) {
-      this.allInquiries = this.allInquiries.filter(inq => inq !== inquiry);
-      localStorage.setItem('inquiries', JSON.stringify(this.allInquiries));
-      this.loadAllInquiries(); // Reload all to update latest and stats
+      console.error('Error loading inquiries and stats from localStorage:', error);
     }
   }
 
