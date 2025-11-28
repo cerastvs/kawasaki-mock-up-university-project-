@@ -55,6 +55,28 @@
                 </ion-select>
               </ion-item>
               <ion-item>
+                <ion-label>Preferred Branch</ion-label>
+                <ion-select interface="popover" placeholder="Select a branch" [(ngModel)]="preferredBranch">
+                  <ion-select-option *ngFor="let branch of branches" [value]="branch">{{ branch }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label>Best Time to Contact</ion-label>
+                <ion-select interface="popover" placeholder="Select a time" [(ngModel)]="bestTimeToContact">
+                  <ion-select-option *ngFor="let time of contactTimes" [value]="time">{{ time }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label>Payment Plan</ion-label>
+                <ion-select interface="popover" placeholder="Select a plan" [(ngModel)]="paymentPlan">
+                  <ion-select-option *ngFor="let plan of paymentPlans" [value]="plan">{{ plan }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Budget Range</ion-label>
+                <ion-input type="text" [(ngModel)]="budgetRange" placeholder="e.g., 100,000 - 150,000"></ion-input>
+              </ion-item>
+              <ion-item>
                 <ion-label position="stacked">Message / Notes (optional)</ion-label>
                 <ion-textarea [(ngModel)]="message" placeholder="Enter your message or notes"></ion-textarea>
               </ion-item>
