@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Submitted Inquiries</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="clearInquiries()">Clear All</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="inquiries.length > 0; else noInquiries">
+    <ion-item *ngFor="let inquiry of inquiries">
+      <ion-label>
+        <h2>Inquiry for: {{ inquiry.motorcycle }}</h2>
+        <p>Full Name: {{ inquiry.fullName }}</p>
+        <p>Phone: {{ inquiry.phoneNumber }}</p>
+        <p>Email: {{ inquiry.email || 'N/A' }}</p>
+        <p>Preferred Color: {{ inquiry.preferredColor || 'N/A' }}</p>
+        <p>Preferred Branch: {{ inquiry.preferredBranch || 'N/A' }}</p>
+        <p>Best Time to Contact: {{ inquiry.bestTimeToContact || 'N/A' }}</p>
+        <p>Payment Plan: {{ inquiry.paymentPlan || 'N/A' }}</p>
+        <p>Budget Range: {{ inquiry.budgetRange || 'N/A' }}</p>
+        <p>Message: {{ inquiry.message || 'N/A' }}</p>
+        <p>Submitted At: {{ inquiry.submittedAt | date:'medium' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noInquiries>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>No Inquiries Yet</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>You haven't submitted any inquiries yet. Please go to a motorcycle's detail page and fill out the inquiry form.</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>
