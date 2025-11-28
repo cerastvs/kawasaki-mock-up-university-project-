@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-motorcycle-details-modal',
@@ -24,7 +25,7 @@ export class MotorcycleDetailsModalComponent  implements OnInit {
   minMonthsToPay: number = 6;
   maxMonthsToPay: number = 36;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private router: Router) { }
 
   ngOnInit() {
     if (this.motorcycle && this.motorcycle.priceSRP) {
@@ -35,6 +36,11 @@ export class MotorcycleDetailsModalComponent  implements OnInit {
 
   close() {
     this.modalCtrl.dismiss();
+  }
+
+  goToInquiryPage() {
+    this.modalCtrl.dismiss();
+    this.router.navigate(['/inquiry', { motorcycle: this.motorcycle.modelName }]);
   }
 
   toggleFinanceView() {

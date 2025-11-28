@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'user/:id',
     loadComponent: () => import('./user/user.page').then( m => m.UserPage)
+  },
+  {
+    path: 'inquiry',
+    loadChildren: () => import('./inquiry/inquiry.module').then( m => m.InquiryPageModule)
   }
 ];
 

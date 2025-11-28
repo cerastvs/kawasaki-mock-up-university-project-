@@ -113,7 +113,7 @@
 <ion-footer>
   <ion-toolbar>
     <div class="ion-padding button-container">
-      <ion-button *ngIf="!showFinanceCalculator">Reserve / Inquire</ion-button>
+      <ion-button *ngIf="!showFinanceCalculator" (click)="goToInquiryPage()">Reserve / Inquire</ion-button>
       <ion-button *ngIf="!showFinanceCalculator" color="secondary" (click)="toggleFinanceView()">Calculate Finance</ion-button>
       <ion-button *ngIf="showFinanceCalculator" (click)="toggleFinanceView()">Back to Details</ion-button>
     </div>

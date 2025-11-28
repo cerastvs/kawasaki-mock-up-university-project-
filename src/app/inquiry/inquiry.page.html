@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inquiry for {{ motorcycle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Your Name</ion-label>
+      <ion-input type="text" placeholder="Enter your name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Your Email</ion-label>
+      <ion-input type="email" placeholder="Enter your email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Your Message</ion-label>
+      <ion-textarea placeholder="Enter your message"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" class="ion-margin-top">Submit Inquiry</ion-button>
+</ion-content>
