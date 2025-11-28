@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/admin"></ion-back-button>
     </ion-buttons>
-    <ion-title>Submitted Inquiries</ion-title>
+    <ion-title>{{ currentFilter === 'pending' ? 'Pending Inquiries' : currentFilter === 'completed' ? 'Completed Inquiries' : 'All Inquiries' }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="clearInquiries()">Clear All</ion-button>
     </ion-buttons>

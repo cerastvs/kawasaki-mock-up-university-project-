@@ -43,8 +43,13 @@ export class AdminPage implements OnInit {
     }
   }
 
-  navigateToInquiriesList() {
-    this.router.navigate(['/inquiries-list']);
+  navigateToFilteredInquiries(filterStatus: string | null) {
+    if (filterStatus) {
+      this.router.navigate(['/inquiries-list', { filter: filterStatus }]);
+    } else {
+      this.router.navigate(['/inquiries-list']);
+    }
   }
+
 
 }
