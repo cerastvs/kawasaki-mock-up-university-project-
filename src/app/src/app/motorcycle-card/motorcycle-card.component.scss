@@ -14,6 +14,21 @@ ion-card {
   padding: 8px;
 }
 
+ion-card-header {
+  min-height: 80px; /* Adjust as needed to accommodate 2 lines of title */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 0; /* Adjust padding as necessary */
+}
+
+ion-card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.2em; /* Ensure font size is consistent */
+}
+
 ion-card-content {
   flex-grow: 1; 
   display: flex;
