@@ -24,17 +24,13 @@ export class LoginPage implements OnInit {
 
   async login() {
     try {
-      const response = await fetch('assets/users.json');
-      if (!response.ok) {
-        throw new Error('Failed to load users.');
-      }
-      const users = await response.json();
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
       const user = users.find((u: any) => u.username === this.username && u.password === this.password);
       if (user) {
         if (user.role === 'admin') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/user', user.id]);
+          this.router.navigate(['/user', user.userId]); // Use user.userId
         }
       } else {
         this.errorMessage = 'Invalid username or password.';
