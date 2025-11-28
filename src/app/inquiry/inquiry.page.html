@@ -3,24 +3,33 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>Inquiry for {{ motorcycle }}</ion-title>
+    <ion-title>Inquiry for {{ motorcycleName }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">Your Name</ion-label>
-      <ion-input type="text" placeholder="Enter your name"></ion-input>
+      <ion-label position="stacked">Full Name</ion-label>
+      <ion-input type="text" [(ngModel)]="fullName" placeholder="Enter your full name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Your Email</ion-label>
-      <ion-input type="email" placeholder="Enter your email"></ion-input>
+      <ion-label position="stacked">Phone Number</ion-label>
+      <ion-input type="tel" [(ngModel)]="phoneNumber" placeholder="Enter your phone number"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Your Message</ion-label>
-      <ion-textarea placeholder="Enter your message"></ion-textarea>
+      <ion-label position="stacked">Email (optional)</ion-label>
+      <ion-input type="email" [(ngModel)]="email" placeholder="Enter your email"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="availableColors && availableColors.length > 0">
+      <ion-select interface="popover" placeholder="Select Preferred Color" [(ngModel)]="preferredColor">
+        <ion-select-option *ngFor="let color of availableColors" [value]="color">{{ color }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Message / Notes (optional)</ion-label>
+      <ion-textarea [(ngModel)]="message" placeholder="Enter your message or notes"></ion-textarea>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" class="ion-margin-top">Submit Inquiry</ion-button>
+  <ion-button expand="block" class="ion-margin-top" (click)="submitInquiry()">Submit Inquiry</ion-button>
 </ion-content>
