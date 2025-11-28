@@ -57,16 +57,6 @@ export class InquiryPage implements OnInit {
               this.preferredColor = this.availableColors[0]; // Set default preferred color
             }
           }
-          // Set default values for dropdowns
-          if (this.branches.length > 0) {
-            this.preferredBranch = this.branches[0];
-          }
-          if (this.contactTimes.length > 0) {
-            this.bestTimeToContact = this.contactTimes[0];
-          }
-          if (this.paymentPlans.length > 0) {
-            this.paymentPlan = this.paymentPlans[0];
-          }
         } catch (error) {
           console.error('Error reading motorcycle data from localStorage:', error);
         }
