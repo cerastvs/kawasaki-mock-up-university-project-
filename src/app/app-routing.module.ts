@@ -5,6 +5,7 @@ import { LoginPage } from './login/login.page';
 import { AdminPage } from './admin/admin.page';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from './auth-guard'; // Import AuthGuard
 
 const routes: Routes = [
   {
@@ -22,11 +23,13 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminPage
+    component: AdminPage,
+    canActivate: [AuthGuard] // Protect admin route
   },
   {
     path: 'user/:id',
-    loadComponent: () => import('./user/user.page').then( m => m.UserPage)
+    loadComponent: () => import('./user/user.page').then( m => m.UserPage),
+    canActivate: [AuthGuard] // Protect user route
   },
   {
     path: 'inquiry',

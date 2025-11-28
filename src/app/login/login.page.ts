@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../auth'; // Import AuthService
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginPage implements OnInit {
   password = '';
   errorMessage = '';
 
-  constructor(private router: Router, private cd: ChangeDetectorRef) { }
+  constructor(private router: Router, private cd: ChangeDetectorRef, private authService: AuthService) { } // Inject AuthService
 
   ngOnInit() {
   }
@@ -27,10 +28,11 @@ export class LoginPage implements OnInit {
       const users = JSON.parse(localStorage.getItem('users') || '[]');
       const user = users.find((u: any) => u.username === this.username && u.password === this.password);
       if (user) {
+        this.authService.login(user); // Store user in AuthService and localStorage
         if (user.role === 'admin') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/user', user.userId]); // Use user.userId
+          this.router.navigate(['/user', user.userId]);
         }
       } else {
         this.errorMessage = 'Invalid username or password.';

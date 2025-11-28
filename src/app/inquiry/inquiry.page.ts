@@ -3,20 +3,21 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-// Removed HttpClient, HttpClientModule, firstValueFrom as they are no longer needed here
+import { AuthService } from '../auth'; // Import AuthService
 
 @Component({
   selector: 'app-inquiry',
   templateUrl: './inquiry.page.html',
   styleUrls: ['./inquiry.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule] // Removed HttpClientModule
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class InquiryPage implements OnInit {
 
   motorcycleName: string | null = null;
   motorcycle: any | null = null;
   availableColors: string[] = [];
+  currentUserId: string | null = null; // Property to store the current user ID
 
   // Form fields
   fullName: string = '';
@@ -42,7 +43,7 @@ export class InquiryPage implements OnInit {
   contactTimes: string[] = ['Morning', 'Afternoon', 'Evening', 'Any time'];
   paymentPlans: string[] = ['Cash', 'Installment (In-House Financing)', 'Bank Loan'];
 
-  constructor(private route: ActivatedRoute /* Removed private http: HttpClient */) { }
+  constructor(private route: ActivatedRoute, private authService: AuthService) { } // Inject AuthService
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -62,6 +63,12 @@ export class InquiryPage implements OnInit {
         }
       }
     });
+
+    // Get current user ID from AuthService
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser) {
+      this.currentUserId = currentUser.userId;
+    }
   }
 
   submitInquiry() {
