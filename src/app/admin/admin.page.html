@@ -6,6 +6,7 @@
 
 <ion-content class="ion-padding">
   <ion-grid>
+    <!-- Quick Stats -->
     <ion-row>
       <ion-col size="12" size-md="4">
         <ion-card>
@@ -34,6 +35,41 @@
           </ion-card-header>
           <ion-card-content class="ion-text-center">
             <h1>{{ completedInquiries }}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Inquiry Management (CRUD) -->
+    <ion-row class="ion-margin-top">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>All Inquiries</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list *ngIf="allInquiries.length > 0; else noInquiries">
+              <ion-item *ngFor="let inquiry of allInquiries">
+                <ion-label>
+                  <h2>Inquiry for: {{ inquiry.motorcycle }} ({{ inquiry.status | titlecase }})</h2>
+                  <p>Name: {{ inquiry.fullName }} | Phone: {{ inquiry.phoneNumber }} | Email: {{ inquiry.email }}</p>
+                  <p>Branch: {{ inquiry.preferredBranch }} | Color: {{ inquiry.preferredColor }} | Payment: {{ inquiry.paymentPlan }}</p>
+                  <p>Message: {{ inquiry.message }}</p>
+                  <p>Submitted: {{ inquiry.submittedAt | date:'short' }}</p>
+                </ion-label>
+                <div slot="end" class="ion-text-right">
+                  <ion-select interface="popover" placeholder="Update Status" [(ngModel)]="inquiry.status" (ionChange)="updateInquiryStatus(inquiry, inquiry.status)">
+                    <ion-select-option *ngFor="let status of statusOptions" [value]="status">{{ status | titlecase }}</ion-select-option>
+                  </ion-select>
+                  <ion-button color="danger" (click)="deleteInquiry(inquiry)">Delete</ion-button>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ng-template #noInquiries>
+              <ion-item>
+                <ion-label>No inquiries submitted yet.</ion-label>
+              </ion-item>
+            </ng-template>
           </ion-card-content>
         </ion-card>
       </ion-col>
