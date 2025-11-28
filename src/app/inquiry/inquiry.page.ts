@@ -76,7 +76,8 @@ export class InquiryPage implements OnInit {
       bestTimeToContact: this.bestTimeToContact,
       paymentPlan: this.paymentPlan,
       budgetRange: this.budgetRange,
-      submittedAt: new Date().toISOString()
+      submittedAt: new Date().toISOString(),
+      status: 'pending' // Add status field
     };
 
     try {
