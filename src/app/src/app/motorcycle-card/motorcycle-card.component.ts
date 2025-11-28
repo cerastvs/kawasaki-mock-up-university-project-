@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-motorcycle-card',
@@ -17,12 +18,16 @@ export class MotorcycleCardComponent  implements OnInit {
 
   @Output() viewDetails = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
   onViewDetails() {
     this.viewDetails.emit(this.id);
+  }
+
+  onReserveInquire() {
+    this.router.navigate(['/inquiry', { motorcycle: this.modelName }]);
   }
 
 }

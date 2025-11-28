@@ -3,15 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+// Removed HttpClient, HttpClientModule, firstValueFrom as they are no longer needed here
 
 @Component({
   selector: 'app-inquiry',
   templateUrl: './inquiry.page.html',
   styleUrls: ['./inquiry.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, HttpClientModule]
+  imports: [IonicModule, CommonModule, FormsModule] // Removed HttpClientModule
 })
 export class InquiryPage implements OnInit {
 
@@ -19,21 +18,38 @@ export class InquiryPage implements OnInit {
   motorcycle: any | null = null;
   availableColors: string[] = [];
 
+  // Form fields
   fullName: string = '';
   phoneNumber: string = '';
   email: string = '';
   preferredColor: string = '';
   message: string = '';
+  preferredBranch: string = '';
+  bestTimeToContact: string = '';
+  paymentPlan: string = '';
+  budgetRange: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  // Dropdown options
+  branches: string[] = [
+    'Head Office',
+    'Commonwealth',
+    'Mabalacat',
+    'Cebu',
+    'Bacolod',
+    'Tacloban',
+    'Davao'
+  ];
+  contactTimes: string[] = ['Morning', 'Afternoon', 'Evening', 'Any time'];
+  paymentPlans: string[] = ['Cash', 'Installment (In-House Financing)', 'Bank Loan'];
 
-  async ngOnInit() {
-    this.route.paramMap.subscribe(async params => {
+  constructor(private route: ActivatedRoute /* Removed private http: HttpClient */) { }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
       this.motorcycleName = params.get('motorcycle');
       if (this.motorcycleName) {
-        // Fetch full motorcycle data
         try {
-          const motorcyclesData: any = await firstValueFrom(this.http.get('/assets/motorcycles.json'));
+          const motorcyclesData = JSON.parse(localStorage.getItem('motorcycles') || '[]');
           this.motorcycle = motorcyclesData.find((m: any) => m.modelName === this.motorcycleName);
           if (this.motorcycle && this.motorcycle.availableColors) {
             this.availableColors = this.motorcycle.availableColors;
@@ -42,23 +58,41 @@ export class InquiryPage implements OnInit {
             }
           }
         } catch (error) {
-          console.error('Error fetching motorcycle data:', error);
+          console.error('Error reading motorcycle data from localStorage:', error);
         }
       }
     });
   }
 
   submitInquiry() {
-    console.log('Inquiry Submitted!', {
+    const newInquiry = {
       motorcycle: this.motorcycleName,
       fullName: this.fullName,
       phoneNumber: this.phoneNumber,
       email: this.email,
       preferredColor: this.preferredColor,
-      message: this.message
-    });
-    // Here you would typically send this data to a backend service
-    alert('Inquiry submitted successfully!');
+      message: this.message,
+      preferredBranch: this.preferredBranch,
+      bestTimeToContact: this.bestTimeToContact,
+      paymentPlan: this.paymentPlan,
+      budgetRange: this.budgetRange,
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      // Get existing inquiries from localStorage
+      const existingInquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+      // Add the new inquiry
+      existingInquiries.push(newInquiry);
+      // Save back to localStorage
+      localStorage.setItem('inquiries', JSON.stringify(existingInquiries));
+
+      console.log('Inquiry saved to localStorage:', newInquiry);
+      alert('Inquiry submitted successfully and saved locally!');
+    } catch (error) {
+      console.error('Error saving inquiry to localStorage:', error);
+      alert('There was an error submitting your inquiry.');
+    }
   }
 
 }

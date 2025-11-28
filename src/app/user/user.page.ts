@@ -26,26 +26,23 @@ export class UserPage implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private modalCtrl: ModalController, private cd: ChangeDetectorRef) { }
 
-  async ngOnInit() {
-  const userId = this.route.snapshot.paramMap.get('id');
+  ngOnInit() {
+    const userId = this.route.snapshot.paramMap.get('id');
 
-  try {
-    const userResponse = await fetch('/assets/users.json');
-    const users = await userResponse.json();
-    this.user = users.find((u: any) => u.id === userId);
+    try {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      this.user = users.find((u: any) => u.id === userId);
 
-    const motoResponse = await fetch('/assets/motorcycles.json');
-    this.motorcycles = await motoResponse.json();
+      this.motorcycles = JSON.parse(localStorage.getItem('motorcycles') || '[]');
 
-
-    if (this.motorcycles.length > 0) {
-      this.activeMotorcycle = this.motorcycles[0];
+      if (this.motorcycles.length > 0) {
+        this.activeMotorcycle = this.motorcycles[0];
+      }
+      this.initSwiper(); // Call initSwiper after motorcycles are loaded
+    } catch (error) {
+      console.error('Error reading data from localStorage:', error);
     }
-    this.initSwiper(); // Call initSwiper after motorcycles are loaded
-  } catch (error) {
-    console.error('Error fetching data:', error);
   }
-}
 
   ngAfterViewInit() {
     // initSwiper is now called from ngOnInit

@@ -1,20 +1,14 @@
 [
   {
-    "id": "1",
-    "username": "admin",
-    "password": "password",
-    "role": "admin",
-    "fullName": "Administrator",
-    "phoneNumber": "123-456-7890",
-    "email": "admin@example.com"
-  },
-  {
-    "id": "2",
+    "userId": 1,
     "username": "user",
     "password": "password",
-    "role": "user",
-    "fullName": "Regular User",
-    "phoneNumber": "098-765-4321",
-    "email": ""
+    "role": "user"
+  },
+  {
+    "userId": 2,
+    "username": "admin",
+    "password": "password",
+    "role": "admin"
   }
 ]
