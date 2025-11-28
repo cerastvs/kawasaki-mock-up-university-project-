@@ -8,28 +8,66 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list>
-    <ion-item>
-      <ion-label position="stacked">Full Name</ion-label>
-      <ion-input type="text" [(ngModel)]="fullName" placeholder="Enter your full name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Phone Number</ion-label>
-      <ion-input type="tel" [(ngModel)]="phoneNumber" placeholder="Enter your phone number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Email (optional)</ion-label>
-      <ion-input type="email" [(ngModel)]="email" placeholder="Enter your email"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="availableColors && availableColors.length > 0">
-      <ion-select interface="popover" placeholder="Select Preferred Color" [(ngModel)]="preferredColor">
-        <ion-select-option *ngFor="let color of availableColors" [value]="color">{{ color }}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Message / Notes (optional)</ion-label>
-      <ion-textarea [(ngModel)]="message" placeholder="Enter your message or notes"></ion-textarea>
-    </ion-item>
-  </ion-list>
-  <ion-button expand="block" class="ion-margin-top" (click)="submitInquiry()">Submit Inquiry</ion-button>
+  <ion-card *ngIf="motorcycle">
+    <ion-grid>
+      <ion-row>
+        <!-- Left Column: Motorcycle Details -->
+        <ion-col size="12" size-md="6">
+          <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName" class="motorcycle-image" />
+          <ion-card-header>
+            <ion-card-title><strong>{{ motorcycle.modelName }}</strong></ion-card-title>
+            <ion-card-subtitle>SRP: ₱{{ motorcycle.priceSRP }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label>Category</ion-label>
+                <ion-note slot="end">{{ motorcycle.category }}</ion-note>
+              </ion-item>
+              <ion-item>
+                <ion-label>Displacement</ion-label>
+                <ion-note slot="end">{{ motorcycle.displacementCC }}cc</ion-note>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-col>
+
+        <!-- Right Column: Inquiry Form -->
+        <ion-col size="12" size-md="6">
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label position="stacked">Full Name</ion-label>
+                <ion-input type="text" [(ngModel)]="fullName" placeholder="Enter your full name"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Phone Number</ion-label>
+                <ion-input type="tel" [(ngModel)]="phoneNumber" placeholder="Enter your phone number"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Email (optional)</ion-label>
+                <ion-input type="email" [(ngModel)]="email" placeholder="Enter your email"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="availableColors && availableColors.length > 0">
+                <ion-label>Preferred Color</ion-label>
+                <ion-select interface="popover" placeholder="Select a color" [(ngModel)]="preferredColor">
+                  <ion-select-option *ngFor="let color of availableColors" [value]="color">{{ color }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Message / Notes (optional)</ion-label>
+                <ion-textarea [(ngModel)]="message" placeholder="Enter your message or notes"></ion-textarea>
+              </ion-item>
+            </ion-list>
+            <ion-button expand="block" class="ion-margin-top" (click)="submitInquiry()">Submit Inquiry</ion-button>
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!-- Show a loading spinner while motorcycle data is being fetched -->
+  <div *ngIf="!motorcycle" class="ion-text-center">
+    <ion-spinner></ion-spinner>
+  </div>
 </ion-content>
