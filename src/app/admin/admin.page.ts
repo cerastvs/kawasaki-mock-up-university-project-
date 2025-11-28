@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -17,9 +18,10 @@ export class AdminPage implements OnInit {
   completedInquiries: number = 0;
 
   allInquiries: any[] = [];
+  latestInquiries: any[] = []; // New property for latest inquiries
   statusOptions: string[] = ['pending', 'in progress', 'completed'];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.loadAllInquiries(); // Load all inquiries on init
@@ -28,6 +30,10 @@ export class AdminPage implements OnInit {
   loadAllInquiries() {
     try {
       this.allInquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+      // Sort inquiries by submittedAt in descending order and take the top 3
+      this.latestInquiries = this.allInquiries
+                               .sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime())
+                               .slice(0, 3);
       this.loadInquiryStats(); // Recalculate stats after loading all inquiries
     } catch (error) {
       console.error('Error loading all inquiries from localStorage:', error);
@@ -45,7 +51,7 @@ export class AdminPage implements OnInit {
     if (inquiryIndex > -1) {
       this.allInquiries[inquiryIndex].status = newStatus;
       localStorage.setItem('inquiries', JSON.stringify(this.allInquiries));
-      this.loadInquiryStats(); // Refresh stats
+      this.loadAllInquiries(); // Reload all to update latest and stats
     }
   }
 
@@ -53,8 +59,12 @@ export class AdminPage implements OnInit {
     if (confirm(`Are you sure you want to delete the inquiry for ${inquiry.motorcycle}?`)) {
       this.allInquiries = this.allInquiries.filter(inq => inq !== inquiry);
       localStorage.setItem('inquiries', JSON.stringify(this.allInquiries));
-      this.loadInquiryStats(); // Refresh stats
+      this.loadAllInquiries(); // Reload all to update latest and stats
     }
+  }
+
+  navigateToInquiriesList() {
+    this.router.navigate(['/inquiries-list']);
   }
 
 }

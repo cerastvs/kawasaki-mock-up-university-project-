@@ -40,36 +40,27 @@
       </ion-col>
     </ion-row>
 
-    <!-- Inquiry Management (CRUD) -->
+    <!-- Latest Inquiries -->
     <ion-row class="ion-margin-top">
       <ion-col size="12">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>All Inquiries</ion-card-title>
+            <ion-card-title>Latest Inquiries</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-list *ngIf="allInquiries.length > 0; else noInquiries">
-              <ion-item *ngFor="let inquiry of allInquiries">
+            <ion-list *ngIf="latestInquiries.length > 0; else noLatestInquiries">
+              <ion-item *ngFor="let inquiry of latestInquiries">
                 <ion-label>
-                  <h2>Inquiry for: {{ inquiry.motorcycle }} ({{ inquiry.status | titlecase }})</h2>
-                  <p>Name: {{ inquiry.fullName }} | Phone: {{ inquiry.phoneNumber }} | Email: {{ inquiry.email }}</p>
-                  <p>Branch: {{ inquiry.preferredBranch }} | Color: {{ inquiry.preferredColor }} | Payment: {{ inquiry.paymentPlan }}</p>
-                  <p>Message: {{ inquiry.message }}</p>
-                  <p>Submitted: {{ inquiry.submittedAt | date:'short' }}</p>
+                  <h2>Inquiry for: {{ inquiry.motorcycle }}</h2>
                 </ion-label>
-                <div slot="end" class="ion-text-right">
-                  <ion-select interface="popover" placeholder="Update Status" [(ngModel)]="inquiry.status" (ionChange)="updateInquiryStatus(inquiry, inquiry.status)">
-                    <ion-select-option *ngFor="let status of statusOptions" [value]="status">{{ status | titlecase }}</ion-select-option>
-                  </ion-select>
-                  <ion-button color="danger" (click)="deleteInquiry(inquiry)">Delete</ion-button>
-                </div>
               </ion-item>
             </ion-list>
-            <ng-template #noInquiries>
+            <ng-template #noLatestInquiries>
               <ion-item>
-                <ion-label>No inquiries submitted yet.</ion-label>
+                <ion-label>No recent inquiries.</ion-label>
               </ion-item>
             </ng-template>
+            <ion-button expand="block" class="ion-margin-top" (click)="navigateToInquiriesList()">MANAGE INQUIRIES</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
