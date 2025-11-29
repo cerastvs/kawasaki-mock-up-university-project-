@@ -1,0 +1,37 @@
+.filter-controls {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 16px;
+    flex-wrap: wrap;
+  
+    ion-searchbar {
+      flex: 1;
+      min-width: 250px;
+    }
+  
+    ion-item {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+  
+.gear-catalog-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 16px;
+
+    ion-card {
+        flex: 0 0 250px; // This gives a fixed width to the cards
+        cursor: pointer;
+        text-align: center;
+    }
+}
+
+ion-card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}

@@ -6,13 +6,13 @@
 
 <ion-content [fullscreen]="true">
   <ion-card-header>
-    <ion-card-title>Featured Motorcycles</ion-card-title>
+    <ion-card-title>Latest Motorcycles</ion-card-title>
   </ion-card-header>
 
   <div class="featured-motorcycle-wrapper">
     <div class="featured-content-container">
       <swiper-container #swiperContainer class="image-slider" (swiperinit)="handleSwiperInit($event)" (swiperslidechange)="handleSwiperSlideChange($event)">
-        <swiper-slide *ngFor="let motorcycle of motorcycles">
+        <swiper-slide *ngFor="let motorcycle of latestMotorcycles">
           <div class="image">
             <img [src]="motorcycle.mainImage" [alt]="motorcycle.modelName">
           </div>
@@ -32,21 +32,14 @@
   </div>
 
   <ion-card-header>
-    <ion-card-title>Available Motorcycles</ion-card-title>
+    <ion-card-title>Motorcycle Catalog</ion-card-title>
   </ion-card-header>
+  <app-motorcycle-catalog></app-motorcycle-catalog>
 
-  <div *ngIf="motorcycles.length > 0" class="motorcycle-container">
-    <app-motorcycle-card
-      *ngFor="let motorcycle of motorcycles"
-      [id]="motorcycle.id"
-      [modelName]="motorcycle.modelName"
-      [priceSRP]="motorcycle.priceSRP"
-      [mainImage]="motorcycle.mainImage"
-      (viewDetails)="handleViewDetails($event)"
-    ></app-motorcycle-card>
-  </div>
-  <div *ngIf="motorcycles.length === 0">
-    <p class="ion-padding">No motorcycles available.</p>
-  </div>
+  <ion-card-header>
+    <ion-card-title>Gear Catalog</ion-card-title>
+  </ion-card-header>
+  <app-gear-catalog></app-gear-catalog>
+
 
 </ion-content>

@@ -62,5 +62,53 @@
     "seatHeight": 750,
     "transmission": "V-belt automatic (CVT)",
     "weightKerb": 94
+  },
+  {
+    "availableColors": ["Matte Pearl White", "Matte Black", "Matte Solar Red Metallic"],
+    "category": "scooter/adventure",
+    "displacementCC": 157,
+    "engineType": "157cc, air-cooled, 4-stroke, SOHC, 4-valve",
+    "fuelCapacity": 8.1,
+    "id": "6",
+    "mainImage": "assets/images/Honda ADV160.jpeg",
+    "maxPower": "11.8 kW (16 PS) @ 8500r/min",
+    "maxTorque": "14.7N·m (1.5kgf·m) @ 6500r/min",
+    "modelName": "Honda ADV160",
+    "priceSRP": 166000,
+    "seatHeight": 780,
+    "transmission": "V-belt automatic (CVT)",
+    "weightKerb": 133
+  },
+  {
+    "availableColors": ["Premium White", "Matte Black"],
+    "category": "scooter",
+    "displacementCC": 155,
+    "engineType": "4-Stroke, 4-Valve, Liquid Cooled, SOHC",
+    "fuelCapacity": 4.6,
+    "id": "aerox-s-155",
+    "mainImage": "assets/images/Yamaha Mio Aerox S.jpeg",
+    "maxPower": "11.0kW (15.0PS) @ 8000r/min",
+    "maxTorque": "13.8N·m (1.4kgf·m) @ 6250r/min",
+    "modelName": "Yamaha Mio Aerox S",
+    "priceSRP": 146000,
+    "seatHeight": 790,
+    "transmission": "Automatic",
+    "weightKerb": 118
+  },
+  {
+    "availableColors": ["Racing Blue"],
+    "category": "Sport / Underbone",
+    "displacementCC": 155,
+    "engineType": "Liquid-cooled, 4-stroke, SOHC, 4-valve",
+    "fuelCapacity": 4.2,
+    "id": "7",
+    "mainImage": "assets/images/Yamaha Sniper 155.jpeg",
+    "maxPower": "15.4 PS @ 8,000 rpm",
+    "maxTorque": "13.9 Nm @ 6,500 rpm",
+    "modelName": "Yamaha Sniper 155",
+    "priceSRP": 105000,
+    "seatHeight": 785,
+    "transmission": "CVT (automatic)",
+    "weightKerb": 118
   }
 ]

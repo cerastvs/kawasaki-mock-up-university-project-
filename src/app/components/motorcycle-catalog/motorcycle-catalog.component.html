@@ -1,0 +1,25 @@
+<div class="filter-controls">
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterMotorcycles()" placeholder="Search by name..."></ion-searchbar>
+  <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select [(ngModel)]="selectedCategory" (ionChange)="filterMotorcycles()" placeholder="All">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option *ngFor="let category of categories" [value]="category">{{ category }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
+
+<div class="motorcycle-catalog-container">
+  <app-motorcycle-card
+    *ngFor="let motorcycle of filteredMotorcycles"
+    [id]="motorcycle.id"
+    [modelName]="motorcycle.modelName"
+    [priceSRP]="motorcycle.priceSRP"
+    [mainImage]="motorcycle.mainImage"
+    (viewDetails)="handleViewDetails($event)"
+  ></app-motorcycle-card>
+
+  <div *ngIf="filteredMotorcycles.length === 0" class="ion-padding">
+    <p>No motorcycles found matching your criteria.</p>
+  </div>
+</div>

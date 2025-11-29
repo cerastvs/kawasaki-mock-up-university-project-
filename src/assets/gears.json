@@ -1,0 +1,74 @@
+[
+    {
+      "id": "gear1",
+      "name": "Kawasaki Racing Helmet",
+      "category": "Helmet",
+      "price": 15000,
+      "image": "assets/images/Helmet.jpg",
+      "description": "High-performance racing helmet with advanced safety features.",
+      "stockStatus": "In Stock"
+    },
+    {
+      "id": "gear2",
+      "name": "Kawasaki Leather Jacket",
+      "category": "Jacket",
+      "price": 18000,
+      "image": "assets/images/leatherJacket.jpg",
+      "description": "Premium leather jacket for ultimate protection and style.",
+      "stockStatus": "In Stock"
+    },
+    {
+      "id": "gear3",
+      "name": "Akrapovic Exhaust System",
+      "category": "Exhaust",
+      "price": 35000,
+      "image": "assets/images/Akrapovic Exhaust System.jpg",
+      "description": "Full titanium exhaust system for improved performance and sound.",
+      "stockStatus": "Out of Stock"
+    },
+    {
+      "id": "gear4",
+      "name": "Kawasaki Riding Gloves",
+      "category": "Gloves",
+      "price": 3500,
+      "image": "assets/images/Kawasaki Riding Gloves.webp",
+      "description": "Comfortable and protective riding gloves for all conditions.",
+      "stockStatus": "In Stock"
+    },
+    {
+      "id": "gear5",
+      "name": "Kawasaki Tank Bag",
+      "category": "Luggage",
+      "price": 5000,
+      "image": "assets/images/Kawasaki Tank Bag.jpg",
+      "description": "Magnetic tank bag for convenient storage on your rides.",
+      "stockStatus": "In Stock"
+    },
+    {
+      "id": "gear6",
+      "name": "Kawasaki Racing Boots",
+      "category": "Boots",
+      "price": 12000,
+      "image": "assets/images/Kawasaki Racing Boots.jpeg",
+      "description": "Professional racing boots for maximum grip and protection.",
+      "stockStatus": "In Stock"
+    },
+    {
+      "id": "gear7",
+      "name": "Kawasaki Bike Cover",
+      "category": "Accessory",
+      "price": 2500,
+      "image": "assets/images/Kawasaki Bike Cover.jpg",
+      "description": "Durable and waterproof cover to protect your motorcycle.",
+      "stockStatus": "In Stock"
+    },
+    {
+      "id": "gear8",
+      "name": "Kawasaki Phone Mount",
+      "category": "Accessory",
+      "price": 1500,
+      "image": "assets/images/Kawasaki Phone Mount.webp",
+      "description": "Securely mount your phone for navigation.",
+      "stockStatus": "Out of Stock"
+    }
+]

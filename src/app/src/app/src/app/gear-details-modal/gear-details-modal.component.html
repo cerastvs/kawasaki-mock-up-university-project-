@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ gear?.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="gear">
+    <img [src]="gear.image" [alt]="gear.name">
+    <ion-card-header>
+      <ion-card-title><strong>{{ gear.name }}</strong></ion-card-title>
+      <ion-card-subtitle>₱{{ gear.price }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-note slot="end">{{ gear.category }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Description</ion-label>
+          <ion-note slot="end">{{ gear.description }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Stock Status</ion-label>
+          <ion-note slot="end">{{ gear.stockStatus }}</ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="ion-padding button-container">
+      <!-- Add any gear-specific actions here, e.g., "Add to Cart" -->
+      <ion-button expand="block">Add to Cart</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

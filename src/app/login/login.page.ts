@@ -45,4 +45,8 @@ export class LoginPage implements OnInit {
     }
   }
 
+  continueAsGuest() {
+    this.router.navigate(['/user', 'guest']);
+  }
+
 }

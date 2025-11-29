@@ -1,0 +1,28 @@
+<div class="filter-controls">
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterGears()" placeholder="Search by name..."></ion-searchbar>
+  <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select [(ngModel)]="selectedCategory" (ionChange)="filterGears()" placeholder="All">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option *ngFor="let category of categories" [value]="category">{{ category }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
+
+<div class="gear-catalog-container">
+  <ion-card *ngFor="let gear of filteredGears" (click)="handleViewDetails(gear)">
+    <img [src]="gear.image" [alt]="gear.name" />
+    <ion-card-header>
+      <ion-card-title>{{ gear.name }}</ion-card-title>
+      <ion-card-subtitle>₱{{ gear.price }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ gear.shortDescription }}</p>
+      <p><strong>Stock Status:</strong> {{ gear.stockStatus }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="filteredGears.length === 0" class="ion-padding">
+    <p>No gear found matching your criteria.</p>
+  </div>
+</div>

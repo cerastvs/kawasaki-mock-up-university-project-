@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MotorcycleCardComponent } from 'src/app/src/app/motorcycle-card/motorcycle-card.component';
 import { MotorcycleDetailsModalComponent } from 'src/app/src/app/src/app/motorcycle-details-modal/motorcycle-details-modal.component';
 import { register } from 'swiper/element/bundle';
+import { MotorcycleCatalogComponent } from 'src/app/components/motorcycle-catalog/motorcycle-catalog.component'; // Import the new component
+import { GearCatalogComponent } from 'src/app/components/gear-catalog/gear-catalog.component'; // Import the new GearCatalogComponent
 
 register();
 
@@ -13,13 +15,13 @@ register();
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, MotorcycleCardComponent, MotorcycleDetailsModalComponent],
+  imports: [CommonModule, IonicModule, MotorcycleCardComponent, MotorcycleDetailsModalComponent, MotorcycleCatalogComponent, GearCatalogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UserPage implements OnInit, AfterViewInit {
 
   public user: any;
-  public motorcycles: any[] = [];
+  public latestMotorcycles: any[] = [];
   public activeMotorcycle: any;
   
   @ViewChild('swiperContainer') swiperContainer!: ElementRef;
@@ -33,10 +35,19 @@ export class UserPage implements OnInit, AfterViewInit {
       const users = JSON.parse(localStorage.getItem('users') || '[]');
       this.user = users.find((u: any) => u.id === userId);
 
-      this.motorcycles = JSON.parse(localStorage.getItem('motorcycles') || '[]');
+      const allMotorcycles = JSON.parse(localStorage.getItem('motorcycles') || '[]');
+      
+      // Sort by ID (descending) and take the top 4
+      this.latestMotorcycles = allMotorcycles
+        .sort((a: any, b: any) => {
+          const idA = parseInt(a.id.replace('motor', ''), 10);
+          const idB = parseInt(b.id.replace('motor', ''), 10);
+          return idB - idA;
+        })
+        .slice(0, 4);
 
-      if (this.motorcycles.length > 0) {
-        this.activeMotorcycle = this.motorcycles[0];
+      if (this.latestMotorcycles.length > 0) {
+        this.activeMotorcycle = this.latestMotorcycles[0];
       }
       this.initSwiper(); // Call initSwiper after motorcycles are loaded
     } catch (error) {
@@ -66,22 +77,22 @@ export class UserPage implements OnInit, AfterViewInit {
 
   handleSwiperInit(event: any) {
     const swiper = event.target.swiper;
-    if (this.motorcycles && this.motorcycles.length > 0 && swiper) {
-      this.activeMotorcycle = this.motorcycles[swiper.realIndex];
+    if (this.latestMotorcycles && this.latestMotorcycles.length > 0 && swiper) {
+      this.activeMotorcycle = this.latestMotorcycles[swiper.realIndex];
       this.cd.detectChanges();
     }
   }
 
   handleSwiperSlideChange(event: any) {
     const swiper = event.target.swiper;
-    if (this.motorcycles && this.motorcycles.length > 0 && swiper) {
-      this.activeMotorcycle = this.motorcycles[swiper.realIndex];
+    if (this.latestMotorcycles && this.latestMotorcycles.length > 0 && swiper) {
+      this.activeMotorcycle = this.latestMotorcycles[swiper.realIndex];
       this.cd.detectChanges();
     }
   }
 
   async handleViewDetails(motorcycleId: string) {
-    const motorcycle = this.motorcycles.find(m => m.id === motorcycleId);
+    const motorcycle = this.latestMotorcycles.find(m => m.id === motorcycleId);
     if (!motorcycle) {
       console.error('Motorcycle not found!');
       return;

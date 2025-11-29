@@ -21,6 +21,7 @@
       </ion-item>
 
       <ion-button expand="block" class="ion-margin-top" (click)="login()">Login</ion-button>
+      <ion-button expand="block" fill="clear" class="ion-margin-top" (click)="continueAsGuest()">Continue as Guest</ion-button>
       <div *ngIf="errorMessage" style="color: red; text-align: center; margin-top: 10px;">
         {{ errorMessage }}
       </div>
